@@ -12,12 +12,16 @@ const CSS_HANDLES = [
   'countdown',
   'wrapper-days',
   'days',
+  'name-days',
   'wrapper-hours',
   'hours',
+  'name-hours',
   'wrapper-minutes',
   'minutes',
+  'name-minutes',
   'wrapper-seconds',
-  'seconds'
+  'seconds',
+  'name-seconds'
 ] as const
 
 const DEFAULT_TARGET_DATE = getDaysFromNow()
@@ -45,22 +49,22 @@ const Countdown: StorefrontFunctionComponent<CountdownProps> = ({ targetDate = D
         }
         {
           timeRemaining.days !== "00"
-          ? <p>Days</p>
+          ? <p className={`${handles['name-days']}`}>Days</p>
           : ""
         }
         
       </div>
       <div className={`${handles['wrapper-hours']}`}>
         <h1 className={`${handles['hours']}`}>{timeRemaining.hours}</h1>
-        <p>Hours</p>
+        <p className={`${handles['name-hours']}`}>Hours</p>
       </div>
       <div className={`${handles['wrapper-minutes']}`}>
         <h1 className={`${handles['minutes']}`}>{timeRemaining.minutes}</h1>
-        <p>Minutes</p>
+        <p className={`${handles['name-minutes']}`}>Minutes</p>
       </div>
       <div className={`${handles['wrapper-seconds']}`}>
         <h1 className={`${handles['seconds']}`}>{timeRemaining.seconds}</h1>
-        <p>Seconds</p>
+        <p className={`${handles['name-seconds']}`}>Seconds</p>
       </div>
     </div>
   )
