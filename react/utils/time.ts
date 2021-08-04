@@ -2,6 +2,7 @@ import { TimeSplit } from '../typings/global'
 
 const SECONDS_IN_MINUTE = 60
 const SECONDS_IN_HOUR = 60 * SECONDS_IN_MINUTE
+const SECONDS_IN_DAY = 24 * SECONDS_IN_HOUR
 
 const fillWithZero = (digits: number, number: number): string => {
   const filled = `${'0'.repeat(digits - 1)}${number}`
@@ -10,16 +11,17 @@ const fillWithZero = (digits: number, number: number): string => {
 }
 
 export const parseTimeRemaining = (totalSeconds: number): TimeSplit => {
-  const hours = Math.floor(totalSeconds / SECONDS_IN_HOUR)
+  const days = Math.floor(totalSeconds / SECONDS_IN_DAY)
+  const hours = Math.floor(totalSeconds / SECONDS_IN_HOUR) - (days * 24)
   const minutes = Math.floor(
     (totalSeconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE
   )
-
   const seconds = Math.floor(
     (totalSeconds % SECONDS_IN_HOUR) % SECONDS_IN_MINUTE
   )
 
   return {
+    days: fillWithZero(2, days),
     hours: fillWithZero(2, hours),
     minutes: fillWithZero(2, minutes),
     seconds: fillWithZero(2, seconds),
@@ -47,10 +49,10 @@ export const tick = (
   }, ONE_SECOND_IN_MILLIS)
 }
 
-export const getTwoDaysFromNow = () => {
+export const getDaysFromNow = () => {
   const today = new Date()
 
-  today.setDate(today.getDate() + 2)
+  today.setDate(today.getDate() + 10)
 
   return today.toISOString()
 }
